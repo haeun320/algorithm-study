@@ -1,6 +1,7 @@
+package day0130;
 import java.util.*;
 
-public class Main {
+public class java_3986_윤소윤 {
 
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
