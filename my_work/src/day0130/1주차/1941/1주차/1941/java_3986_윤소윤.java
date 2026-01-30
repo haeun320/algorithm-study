@@ -1,4 +1,3 @@
-package day0130;
 import java.util.*;
 
 public class java_3986_윤소윤 {
