@@ -1,19 +1,22 @@
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
 
 public class 윤소윤_12891 {
 
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int S = sc.nextInt();
-		int P = sc.nextInt();
+	public static void main(String[] args) throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
+		int S = Integer.parseInt(st.nextToken());
+		int P = Integer.parseInt(st.nextToken());
 		
-		String DNA = sc.next();
+		String DNA = br.readLine();
 		int num = 0;
 		
 		// 부분 문자열 최소 개수 (A, C, G, T)
 		int [] count = new int [4];
+		st = new StringTokenizer(br.readLine());
 		for(int i = 0; i < 4; i++) {
-			count[i] = sc.nextInt();
+			count[i] = Integer.parseInt(st.nextToken());
 		}
 		
 		for(int i = 0; i <= S-P; i++) {
