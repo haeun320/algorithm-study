@@ -33,6 +33,7 @@ public class 윤소윤_15686 {
 
         for (int i = 0; i < N; i++) {
             st = new StringTokenizer(br.readLine());
+            // 집 좌표, 개수와 치킨집 좌표, 개수를 저장
             for (int j = 0; j < N; j++) {
                 int v = Integer.parseInt(st.nextToken());
 
@@ -49,7 +50,7 @@ public class 윤소윤_15686 {
         }
 
         mid = new int [H][C];
-        // 치킨집 당 거리 계산
+        // 치킨집 별 집 과의 거리 계산
         for (int i = 0; i < H; i++) {
             int hx = houses[i][0], hy = houses[i][1];
             for(int j = 0; j < C; j++) {
@@ -58,6 +59,7 @@ public class 윤소윤_15686 {
             }
         }
         selected = new int[M];
+        // 조합 계산
         comb(0,0);
 
         System.out.println(ans);
@@ -75,6 +77,7 @@ public class 윤소윤_15686 {
         }
     }
 
+    // 선택된 치킨집과 집 간의 거리 계산
     private static int calcDist() {
         int sum = 0;
 
