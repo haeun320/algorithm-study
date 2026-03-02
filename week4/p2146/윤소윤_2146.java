@@ -5,7 +5,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayDeque;
 import java.util.StringTokenizer;
 
-public class 윤소윤_2573 {
+public class 윤소윤_2146 {
     static int [][] map;
     // 왼 오 위 아
     static int [] dx = {0, 0, -1, 1};
