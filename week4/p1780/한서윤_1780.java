@@ -14,9 +14,9 @@ public class Main {
 			for (int j = 0; j < n; j++)
 				paper[i][j] = Integer.parseInt(st.nextToken());
 		}
-		
+
 		cut(0, 0, n);
-		
+
 		System.out.println(cnt[0]);
 		System.out.println(cnt[1]);
 		System.out.println(cnt[2]);
@@ -27,26 +27,24 @@ public class Main {
 			cnt[paper[r][c] + 1]++;
 			return;
 		}
-		int sameCnt = 0;
+
 		int num = paper[r][c];
-		x: for (int i = 0; i < size; i += size / 3) {
+		for (int i = 0; i < size; i++) {
 			for (int j = 0; j < size; j++) {
-				if (paper[r + i][c + j] != num) // 잘라야 하는 경우.
-					break x;
-			}
-			sameCnt += 3; // 자르지 않아도 되는 경우.
-		}
-
-		if (sameCnt == 9) { // 9개 부분이 모두 같은 숫자면 하나로 결합.
-			cnt[num + 1]++;
-			return;
-		}
-
-		size /= 3; // 9분할.
-		for (int i = 0; i < 3; i++) {
-			for (int j = 0; j < 3; j++) {
-				cut(r + i * size, c + j * size, size);
+				if (paper[r + i][c + j] != num) { // 잘라야 하는 경우.
+					size /= 3; // 9분할.
+					for (int x = 0; x < 3; x++) {
+						for (int y = 0; y < 3; y++) {
+							cut(r + x * size, c + y * size, size);
+						}
+					}
+					return;
+				}
 			}
 		}
+
+		// 모두 같은 숫자면 자르지 않아도 됨. 하나로 결합.
+		cnt[num + 1]++;
 	}
+
 }
