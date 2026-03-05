@@ -23,10 +23,11 @@ public class Main {
 	}
 
 	static void cut(int r, int c, int size) {
-		if (size == 1) { // 더 이상 자를 수 없는 경우.
-			cnt[paper[r][c] + 1]++;
-			return;
-		}
+//		로직 삭제.
+//		if (size == 1) { // 더 이상 자를 수 없는 경우.
+//			cnt[paper[r][c] + 1]++;
+//			return;
+//		}
 
 		int num = paper[r][c];
 		for (int i = 0; i < size; i++) {
@@ -47,4 +48,29 @@ public class Main {
 		cnt[num + 1]++;
 	}
 
+//    // 메서드로 분리. 그치만 줏대있게 기존 방식으로....ㅎ
+//	static boolean isSame(int r, int c, int size) {
+//		int num = paper[r][c];
+//		for (int i = r; i < r + size; i++) {
+//			for (int j = c; j < c + size; j++) {
+//				if (num != paper[i][j])
+//					return false;
+//			}
+//		}
+//		return true;
+//	}
+//
+//	static void cut(int r, int c, int size) {
+//		if (isSame(r, c, size)) {
+//			cnt[paper[r][c] + 1]++;
+//			return;
+//		}
+//
+//		size /= 3; // 9분할.
+//		for (int i = 0; i < 3; i++) {
+//			for (int j = 0; j < 3; j++) {
+//				cut(r + i * size, c + j * size, size);
+//			}
+//		}
+//	}
 }
