@@ -3,7 +3,7 @@ import java.util.*;
 
 class Node {
 	int x, y, time;
-	char state;
+	char state; // 'F': 불, 'J': 지훈.
 
 	Node(int x, int y, int time, char state) {
 		this.x = x;
@@ -24,11 +24,11 @@ public class Main {
 		int r = Integer.parseInt(st.nextToken()), c = Integer.parseInt(st.nextToken()), startR = 0, startC = 0;
 		char map[][] = new char[r][];
 		boolean visited[][] = new boolean[r][c];
-		Queue<Node> q = new ArrayDeque<>(); // 불 먼저, 이동 다음. 한 번에 저장.
+		Queue<Node> q = new ArrayDeque<>(); // 불 먼저, 지훈이 이동 다음. 한 번에 저장.
 		for (int i = 0; i < r; i++) { // input
 			map[i] = br.readLine().toCharArray();
 			for (int j = 0; j < c; j++) {
-				if (map[i][j] == 'J') {
+				if (map[i][j] == 'J') { // 지훈이 초기 위치 저장.
 					map[i][j] = '.';
 					startR = i;
 					startC = j;
@@ -39,6 +39,7 @@ public class Main {
 				}
 			}
 		} // end of input
+		visited[startR][startC] = true;
 		q.add(new Node(startR, startC, 0, 'J'));
 
 		int move = 1; // 이동할 수 있는 경우의 수 관리. 0이되면 더 이상 이동할 수 없으므로 종료.
@@ -56,12 +57,20 @@ public class Main {
 					}
 					continue;
 				}
-				if (map[nr][nc] == '.' && !visited[nr][nc]) {
-					visited[nr][nc] = true; // 방문 여부 체크.
-					q.add(new Node(nr, nc, t + 1, state)); // 다음 이동 저장.
-					map[nr][nc] = state; // 이전 위치와 같은 상태로 전파.
-					if (state == 'J')
+
+				// 기존 로직 수정
+				if (state == 'F') {
+					if (map[nr][nc] == '.') {
+						map[nr][nc] = 'F'; // 불길이 번짐.
+						q.add(new Node(nr, nc, t + 1, state)); // 다음 이동 저장.
+					}
+				}
+				else if (state == 'J') {
+					if (!visited[nr][nc] && map[nr][nc] == '.') {
+						visited[nr][nc] = true; // 방문 여부 체크.
+						q.add(new Node(nr, nc, t + 1, state)); // 다음 이동 저장.
 						move++;
+					}
 				}
 			}
 			if (move == 0) // 더 이상 이동할 곳이 없음.
