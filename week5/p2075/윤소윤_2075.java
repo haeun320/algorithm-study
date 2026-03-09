@@ -1,5 +1,3 @@
-package week5.p2075;
-
 import java.io.*;
 import java.util.*;
 
