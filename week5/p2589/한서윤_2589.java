@@ -30,9 +30,11 @@ public class Main {
 		}
 
 		int maxDis = 0;
+		boolean visited[][] = new boolean[n][m];
 		for (Node node : list) {
 			Queue<Node> q = new ArrayDeque<>();
-			boolean visited[][] = new boolean[n][m];
+			for (int i = 0; i < n; i++) // 개선. 매번 객체 새로 만드는 대신 값 초기화 하기.
+				Arrays.fill(visited[i], false);
 			q.add(node);
 			visited[node.r][node.c] = true;
 			while (!q.isEmpty()) {
