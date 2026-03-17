@@ -11,7 +11,7 @@ class Edge implements Comparable<Edge> {
 
 	@Override
 	public int compareTo(Edge o) { // 가중치 오름차순 정렬.
-		return this.weight - o.weight;
+		return Integer.compare(this.weight, o.weight); // 수정.
 	}
 }
 
