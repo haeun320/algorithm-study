@@ -35,10 +35,14 @@ public class 윤소윤_11404 {
         }
 
         // 플로이드
-        for(int k = 1; k <= N; k++) {
-            for(int i = 1; i <= N; i++) {
-                for(int j = 1; j <= N; j++) {
-                    if(map[i][j] > map[i][k] + map[k][j]) map[i][j] = map[i][k] + map[k][j];
+        for (int k = 1; k <= N; k++) {
+            for (int i = 1; i <= N; i++) {
+                for (int j = 1; j <= N; j++) {
+                    if (map[i][k] != Integer.MAX_VALUE && map[k][j] != Integer.MAX_VALUE) {
+                        if (map[i][j] > map[i][k] + map[k][j]) {
+                            map[i][j] = map[i][k] + map[k][j];
+                        }
+                    }
                 }
             }
         }
