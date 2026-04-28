@@ -26,27 +26,25 @@ public class Main {
 		room = new int[r][c];
 		q = new ArrayDeque<>(); // 미세먼지 위치 저장.
 
-		up = -1;
-		down = -1;
+		up = down = -1;
 		for (int i = 0; i < r; i++) { // 입력.
 			st = new StringTokenizer(br.readLine());
 			for (int j = 0; j < c; j++) {
 				room[i][j] = Integer.parseInt(st.nextToken());
 				if (room[i][j] > 0)
 					q.add(new Dust(i, j, room[i][j]));
-				if (room[i][j] == -1) { // 공기청정기 위치 저장.
-					if (up == -1)
-						up = i;
-					else
-						down = i;
+				if (room[i][j] == -1 && up == -1) { // 공기청정기 위치 저장.
+					up = i;
+					down = i + 1;
 				}
 			}
 		}
 
 		int rst = 0;
 		for (int i = 1; i <= t; i++) {
-			solve();
-			if (i == t) { // t초가 모두 지난 경우.
+			dust();
+			blow();
+			if (i == t) { // t초가 모두 지난 경우 계산 후 종료.
 				for (int j = 0; j < r; j++) {
 					for (int k = 0; k < c; k++) {
 						if (room[j][k] > 0)
@@ -67,8 +65,8 @@ public class Main {
 		System.out.println(rst);
 	}
 
-	static void solve() {
-		while (!q.isEmpty()) { // 미세먼지 확산.
+	static void dust() { // 미세먼지 확산.
+		while (!q.isEmpty()) {
 			Dust cur = q.poll();
 			int cnt = 0;
 			for (int i = 0; i < 4; i++) {
@@ -82,7 +80,9 @@ public class Main {
 			}
 			room[cur.r][cur.c] -= cur.amount / 5 * cnt;
 		}
+	}
 
+	static void blow() {
 		// 위쪽 공기청정기 바람.
 		int nr = up - 1, nc = 0;
 		for (int i = 0; i < 4; i++) { // 상, 우, 하, 좌 순으로 이동.

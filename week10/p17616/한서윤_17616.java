@@ -3,7 +3,7 @@ import java.util.*;
 
 public class Main {
 	static boolean visited[];
-	static int u, v, cnt;
+	static int u, v;
 
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -26,26 +26,24 @@ public class Main {
 
 		u = 1; // 가능한 가장 높은 등수.
 		v = n; // 가능한 가장 낮은 등수.
-		cnt = 0; // x보다 등수가 높은/낮은 학생의 수.
 
 		visited = new boolean[n + 1];
-		dfs(better, x);
-		u += cnt; // 최대 등수 내리기.
+		visited[x] = true;
+		u += dfs(better, x, 0); // 최대 등수 내리기.
 
 		Arrays.fill(visited, false);
-		cnt = 0;
-		dfs(worse, x);
-		v -= cnt; // 최소 등수 올리기.
+		visited[x] = true;
+		v -= dfs(worse, x, 0); // 최소 등수 올리기.
 		System.out.println(u + " " + v);
 	}
 
-	static void dfs(ArrayList<Integer>[] rank, int cur) {
+	static int dfs(ArrayList<Integer>[] rank, int cur, int cnt) { // 등수를 아는 학생 수 return.
 		for (int next : rank[cur]) {
 			if (!visited[next]) {
 				visited[next] = true;
-				cnt++;
-				dfs(rank, next);
+				cnt = dfs(rank, next, cnt + 1);
 			}
 		}
+		return cnt;
 	}
 }
